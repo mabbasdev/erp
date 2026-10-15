@@ -117,6 +117,8 @@
   --radius: 0.625rem;
   --app-scrollbar: #d0d0d0;
   --app-scrollbar-hover: #ababab;
+
+  --kpi-dot: rgba(30, 50, 40, 0.10);
 }
 
 .dark {
@@ -165,6 +167,7 @@
   --brand-surface: #111111;
   --app-scrollbar: #424242;
   --app-scrollbar-hover: #606060;
+  --kpi-dot: rgba(180, 190, 185, 0.10);
 }
 
 /* ============================================
@@ -335,4 +338,9 @@
     transition-duration: 0.01ms !important;
     transform: none !important;
   }
+}
+
+.nexora-kpi-dots {
+  background-image: radial-gradient(circle, var(--kpi-dot) 0.75px, transparent 0.9px);
+  background-size: 16px 16px;
 }
