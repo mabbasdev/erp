@@ -31,21 +31,24 @@ function SheetPortal({
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
 }
 
-function SheetOverlay({
-  className,
-  ...props
-}) {
+
+function SheetOverlay({ className, ...props }) {
   return (
     <SheetPrimitive.Backdrop
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/65 transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-xs",
+        "fixed inset-0 z-50",
+        "bg-black/65",
+        "transition-opacity duration-200 ease-out",
+        "data-starting-style:opacity-0",
+        "data-ending-style:opacity-0",
         className
       )}
       {...props}
     />
-  )
+  );
 }
+
 
 function SheetContent({
   className,

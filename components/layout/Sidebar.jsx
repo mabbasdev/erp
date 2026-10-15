@@ -5,30 +5,32 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import SidebarProfile from "@/components/layout/SidebarProfile";
+import {
+    Tooltip,
+    TooltipTrigger,
+    TooltipContent,
+} from "@/components/ui/tooltip";
+
 
 import {
     Target,
     Search,
-    ChevronDown,
     ChevronRight,
     ChevronsUpDown,
-    PanelLeftClose,
-    PanelLeftOpen,
-    Menu,
-    X,
 } from "lucide-react";
 
 import {
     sidebarMenu,
     workspace,
-    currentUser,
 } from "@/data/sidebar-menu";
 
+
+import AnimatedPopover from "@/components/layout/AnimatedPopover";
+import SidebarProfile from "@/components/layout/SidebarProfile";
 import { useSidebar } from "@/components/layout/SidebarProvider";
 import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/button";
+
 import {
     Sheet,
     SheetContent,
@@ -36,9 +38,9 @@ import {
     SheetDescription,
 } from "@/components/ui/sheet";
 
-/* ---------------------------------------
+/* ============================================
    ROUTE HELPERS
----------------------------------------- */
+============================================ */
 
 function isActiveRoute(pathname, href) {
     if (!href) return false;
@@ -49,122 +51,92 @@ function isActiveRoute(pathname, href) {
     );
 }
 
-/* ---------------------------------------
-   WORKSPACE BRAND
----------------------------------------- */
+/* ============================================
+   WORKSPACE HEADER
+============================================ */
+
 
 function WorkspaceHeader({
     collapsed,
     isMobile,
     onCollapse,
-    onNavigate,
 }) {
     const [workspaceOpen, setWorkspaceOpen] = useState(false);
 
     return (
         <div
             className={cn(
-                "relative flex h-[84px] shrink-0",
-                "items-center border-b border-slate-100",
+                "relative flex h-[76px] shrink-0",
+                "items-center border-b border-sidebar-border",
+                "bg-sidebar",
                 collapsed ? "justify-center px-2" : "px-4"
             )}
         >
             <button
                 type="button"
-                onClick={() => setWorkspaceOpen(!workspaceOpen)}
+                onClick={() => setWorkspaceOpen((value) => !value)}
                 aria-expanded={workspaceOpen}
                 aria-label="Workspace information"
                 className={cn(
+                    "nexora-menu-item",
                     "group flex min-w-0 items-center",
-                    "rounded-xl p-1.5 text-left",
-                    "transition-colors duration-200",
-                    "hover:bg-slate-50",
-                    collapsed ? "justify-center" : "flex-1 gap-3"
+                    "rounded-lg p-1.5 text-left",
+                    "hover:bg-sidebar-accent/60",
+                    collapsed
+                        ? "justify-center"
+                        : "flex-1 gap-2.5"
                 )}
             >
                 <div
                     className={cn(
-                        "flex h-10 w-10 shrink-0 items-center",
+                        "flex h-9 w-9 shrink-0 items-center",
                         "justify-center rounded-xl",
-                        "bg-slate-950 text-white",
-                        "shadow-sm transition-transform duration-200",
-                        "group-hover:scale-[1.04]"
+                        "bg-[#1c1c1c] text-white",
+                        "dark:bg-[#292929] dark:text-[#f0f0f0]"
                     )}
                 >
-                    <Target
-                        className="h-5 w-5"
-                        strokeWidth={1.8}
-                    />
+                    <Target className="h-[18px] w-[18px]" strokeWidth={1.8} />
                 </div>
 
                 {!collapsed && (
                     <>
                         <div className="min-w-0 flex-1">
-                            <p className="truncate text-[14px] font-bold tracking-[-0.3px] text-slate-950">
+                            <p className="truncate text-[13px] font-bold leading-[18px] text-foreground">
                                 {workspace.name}
                             </p>
 
-                            <p className="mt-0.5 text-[11px] font-medium text-slate-400">
+                            <p className="truncate text-[10px] font-medium leading-[15px] text-muted-foreground">
                                 {workspace.type}
                             </p>
                         </div>
 
-                        <ChevronsUpDown className="h-4 w-4 shrink-0 text-slate-400" />
+                        <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground" />
                     </>
                 )}
             </button>
 
-            {workspaceOpen && !collapsed && (
-                <div
-                    className={cn(
-                        "absolute left-4 right-4 top-[74px] z-30",
-                        "rounded-xl border border-slate-200",
-                        "bg-white p-3 shadow-lg"
-                    )}
+            {!collapsed && (
+                <AnimatedPopover
+                    open={workspaceOpen}
+                    className="left-4 right-4 top-[66px] p-3"
                 >
-                    <p className="text-xs font-semibold text-slate-900">
+                    <p className="text-[11px] font-semibold">
                         {workspace.name} {workspace.type}
                     </p>
 
-                    <p className="mt-1 text-[11px] text-slate-500">
+                    <p className="mt-1 text-[10px] text-muted-foreground">
                         Current workspace
                     </p>
-                </div>
-            )}
-
-            {!isMobile && (
-                <button
-                    type="button"
-                    onClick={onCollapse}
-                    aria-label={
-                        collapsed
-                            ? "Expand sidebar"
-                            : "Collapse sidebar"
-                    }
-                    className={cn(
-                        "absolute top-[70px] z-20",
-                        "flex h-7 w-7 items-center",
-                        "justify-center rounded-lg",
-                        "border border-slate-200",
-                        "bg-white text-slate-500 shadow-sm",
-                        "transition-colors hover:bg-slate-50",
-                        collapsed ? "right-[-13px]" : "right-[-13px]"
-                    )}
-                >
-                    {collapsed ? (
-                        <PanelLeftOpen className="h-3.5 w-3.5" />
-                    ) : (
-                        <PanelLeftClose className="h-3.5 w-3.5" />
-                    )}
-                </button>
+                </AnimatedPopover>
             )}
         </div>
     );
 }
 
-/* ---------------------------------------
-   SEARCH
----------------------------------------- */
+
+/* ============================================
+   SIDEBAR SEARCH
+============================================ */
 
 function SidebarSearch({ value, onChange }) {
     return (
@@ -174,29 +146,29 @@ function SidebarSearch({ value, onChange }) {
                     className={cn(
                         "absolute left-3 top-1/2",
                         "h-4 w-4 -translate-y-1/2",
-                        "text-slate-400"
+                        "text-muted-foreground"
                     )}
                 />
 
                 <input
                     type="search"
                     value={value}
-                    onChange={(event) =>
-                        onChange(event.target.value)
-                    }
+                    onChange={(event) => onChange(event.target.value)}
                     placeholder="Search navigation..."
                     aria-label="Search navigation"
                     className={cn(
                         "h-[34px] w-full rounded-md",
                         "border border-sidebar-border",
                         "bg-sidebar pl-9 pr-3",
-                        "text-[11px] text-foreground",
+                        "text-[11px] text-sidebar-foreground",
                         "outline-none",
                         "placeholder:text-muted-foreground",
                         "transition-colors duration-150",
                         "hover:border-primary/30",
                         "focus:border-primary",
-                        "focus:ring-2 focus:ring-primary/10"
+                        "focus:ring-2 focus:ring-primary/10",
+                        "dark:bg-[#191919]",
+                        "dark:hover:border-[#404040]"
                     )}
                 />
             </div>
@@ -204,9 +176,10 @@ function SidebarSearch({ value, onChange }) {
     );
 }
 
-/* ---------------------------------------
-   SINGLE NAVIGATION ITEM
----------------------------------------- */
+/* ============================================
+   NAVIGATION ITEM
+============================================ */
+
 
 function NavigationItem({
     item,
@@ -217,13 +190,12 @@ function NavigationItem({
 }) {
     const active = isActiveRoute(pathname, item.href);
     const [expanded, setExpanded] = useState(false);
-
     const Icon = item.icon;
 
     const itemClasses = cn(
+        "nexora-menu-item",
         "group relative flex h-[34px] w-full",
         "items-center rounded-md text-left",
-        "transition-colors duration-150",
         "focus-visible:outline-none",
         "focus-visible:ring-2",
         "focus-visible:ring-sidebar-ring/30",
@@ -233,8 +205,16 @@ function NavigationItem({
             : "gap-2.5 px-2.5",
 
         active
-            ? "bg-sidebar-accent font-semibold text-sidebar-accent-foreground"
-            : "font-medium text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
+            ? [
+                "bg-sidebar-accent font-semibold",
+                "text-sidebar-accent-foreground",
+                "dark:ring-1 dark:ring-inset dark:ring-white/5",
+            ]
+            : [
+                "font-medium text-sidebar-foreground",
+                "hover:bg-sidebar-accent/70",
+                "hover:text-sidebar-accent-foreground",
+            ]
     );
 
     function handleExpandableClick() {
@@ -248,21 +228,18 @@ function NavigationItem({
     const content = (
         <>
             {active && (
-                <span className="absolute bottom-1.5 left-0 top-1.5 w-[2px] rounded-r-full bg-sidebar-primary" />
+                <span className="absolute bottom-1.5 left-0 top-1.5 w-0.5 rounded-r-full bg-sidebar-primary" />
             )}
-
 
             <Icon
                 strokeWidth={1.8}
                 className={cn(
                     "h-4 w-4 shrink-0",
-                    "transition-colors duration-150",
                     active
-                        ? "text-sidebar-primary"
-                        : "text-[#52615B] group-hover:text-foreground"
+                        ? "text-sidebar-primary dark:text-[#e5e5e5]"
+                        : "text-muted-foreground group-hover:text-sidebar-accent-foreground"
                 )}
             />
-
 
             {!collapsed && (
                 <>
@@ -275,7 +252,7 @@ function NavigationItem({
                             className={cn(
                                 "h-3.5 w-3.5 shrink-0",
                                 "text-muted-foreground",
-                                "transition-transform duration-150",
+                                "transition-transform duration-200",
                                 expanded && "rotate-90"
                             )}
                         />
@@ -285,47 +262,82 @@ function NavigationItem({
         </>
     );
 
+    const navigationElement = item.expandable ? (
+        <button
+            type="button"
+            aria-expanded={expanded}
+            title={collapsed ? undefined : item.title}
+            onClick={handleExpandableClick}
+            className={itemClasses}
+        >
+            {content}
+        </button>
+    ) : (
+        <Link
+            href={item.href}
+            title={collapsed ? undefined : item.title}
+            aria-current={active ? "page" : undefined}
+            onClick={onNavigate}
+            className={itemClasses}
+        >
+            {content}
+        </Link>
+    );
+
     return (
         <div>
-            {item.expandable ? (
-                <button
-                    type="button"
-                    title={collapsed ? item.title : undefined}
-                    aria-expanded={expanded}
-                    onClick={handleExpandableClick}
-                    className={itemClasses}
-                >
-                    {content}
-                </button>
-            ) : (
-                <Link
-                    href={item.href}
-                    title={collapsed ? item.title : undefined}
-                    aria-current={active ? "page" : undefined}
-                    onClick={onNavigate}
-                    className={itemClasses}
-                >
-                    {content}
-                </Link>
-            )}
+            {/* Base UI compatible collapsed tooltip */}
 
-            {item.expandable && expanded && !collapsed && (
-                <div className="ml-[18px] border-l border-sidebar-border pl-3 py-0.5">
-                    <Link
-                        href={item.href}
-                        onClick={onNavigate}
+            {collapsed ? (
+                <Tooltip>
+                    <TooltipTrigger render={navigationElement} />
+
+                    <TooltipContent
+                        side="right"
+                        sideOffset={10}
                         className={cn(
-                            "flex h-[30px] items-center",
-                            "rounded-md px-2.5",
+                            "z-100",
+                            "rounded-md border border-border",
+                            "bg-popover px-2.5 py-1.5",
                             "text-[11px] font-medium",
-                            "transition-colors duration-150",
-                            active
-                                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                                : "text-foreground/75 hover:bg-sidebar-accent/60 hover:text-foreground"
+                            "text-popover-foreground shadow-sm"
                         )}
                     >
-                        All {item.title}
-                    </Link>
+                        {item.title}
+                    </TooltipContent>
+                </Tooltip>
+            ) : (
+                navigationElement
+            )}
+
+            {/* Animated submenu */}
+
+            {item.expandable && !collapsed && (
+                <div
+                    className="nexora-accordion"
+                    data-open={expanded ? "true" : "false"}
+                    inert={!expanded}
+                    aria-hidden={!expanded}
+                >
+                    <div className="nexora-accordion-inner">
+                        <div className="ml-[18px] border-l border-sidebar-border py-0.5 pl-3">
+                            <Link
+                                href={item.href}
+                                onClick={onNavigate}
+                                className={cn(
+                                    "nexora-menu-item",
+                                    "flex h-[30px] items-center",
+                                    "rounded-md px-2.5",
+                                    "text-[11px] font-medium",
+                                    active
+                                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                                        : "text-sidebar-foreground hover:bg-sidebar-accent/70"
+                                )}
+                            >
+                                All {item.title}
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
@@ -333,9 +345,14 @@ function NavigationItem({
 }
 
 
-/* ---------------------------------------
+/* ============================================
    NAVIGATION SECTION
----------------------------------------- */
+============================================ */
+
+
+/* ============================================
+   NAVIGATION SECTION
+============================================ */
 
 function NavigationSection({
     section,
@@ -346,15 +363,23 @@ function NavigationSection({
 }) {
     return (
         <div className="mb-3">
+            {/* Section heading */}
+
             {!collapsed && (
                 <div className="mb-[5px] px-2.5">
-
-                    <h3 className="text-[10px] font-semibold tracking-[0.02em] text-[#52615B]">
+                    <h3
+                        className={cn(
+                            "text-[10px] font-semibold",
+                            "tracking-[0.02em]",
+                            "text-muted-foreground"
+                        )}
+                    >
                         {section.section}
                     </h3>
-
                 </div>
             )}
+
+            {/* Section navigation items */}
 
             <div className="space-y-px">
                 {section.items.map((item) => (
@@ -373,9 +398,9 @@ function NavigationSection({
 }
 
 
-/* ---------------------------------------
+/* ============================================
    SIDEBAR CONTENT
----------------------------------------- */
+============================================ */
 
 function SidebarContent({
     collapsed = false,
@@ -405,12 +430,16 @@ function SidebarContent({
     }, [searchQuery]);
 
     return (
-        <div className="flex h-full min-h-0 flex-col bg-white">
+        <div
+            className={cn(
+                "flex h-full min-h-0 flex-col",
+                "bg-sidebar text-sidebar-foreground"
+            )}
+        >
             <WorkspaceHeader
                 collapsed={collapsed}
                 isMobile={isMobile}
                 onCollapse={onCollapse}
-                onNavigate={onNavigate}
             />
 
             {!collapsed && (
@@ -420,13 +449,13 @@ function SidebarContent({
                 />
             )}
 
+            {/* Scrollable navigation */}
+
             <nav
                 aria-label="CRM navigation"
                 className={cn(
-                    "min-h-0 flex-1 overflow-y-auto",
-                    "overscroll-contain",
-                    "scrollbar-thin",
-                    "[scrollbar-color:#cbd5e1_transparent]",
+                    "nexora-scrollbar min-h-0 flex-1",
+                    "overflow-y-auto overscroll-contain",
                     collapsed
                         ? "px-2 pt-3"
                         : "px-3 pt-2"
@@ -445,41 +474,50 @@ function SidebarContent({
 
                 {filteredSections.length === 0 && (
                     <div className="px-3 py-10 text-center">
-                        <Search className="mx-auto mb-3 h-5 w-5 text-slate-300" />
+                        <Search className="mx-auto mb-3 h-5 w-5 text-muted-foreground" />
 
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-muted-foreground">
                             No matching navigation items
                         </p>
                     </div>
                 )}
             </nav>
 
+            {/* Profile always remains accessible */}
 
             <SidebarProfile
                 collapsed={collapsed}
                 onNavigate={onNavigate}
             />
-
         </div>
     );
 }
 
-/* ---------------------------------------
-   SIDEBAR WRAPPER
----------------------------------------- */
+/* ============================================
+   RESPONSIVE SIDEBAR
+============================================ */
 
 export default function Sidebar() {
-    const { collapsed, setCollapsed } = useSidebar();
-    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const {
+        collapsed,
+        setCollapsed,
+        mobileOpen,
+        setMobileOpen,
+    } = useSidebar();
+
+
 
     return (
         <>
-            {/* Desktop Sidebar */}
+            {/* Desktop sidebar */}
+
             <aside
                 className={cn(
                     "fixed inset-y-0 left-0 z-40",
-                    "hidden border-r border-slate-200",
-                    "bg-white lg:block",
+                    "hidden lg:block",
+                    "border-r border-sidebar-border",
+                    "bg-sidebar text-sidebar-foreground",
                     "transition-[width] duration-300 ease-in-out",
                     collapsed ? "w-[72px]" : "w-64"
                 )}
@@ -491,21 +529,12 @@ export default function Sidebar() {
                 />
             </aside>
 
-            {/* Mobile Menu Button */}
-            <div className="fixed left-3 top-3 z-40 lg:hidden">
-                <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    aria-label="Open navigation"
-                    onClick={() => setMobileOpen(true)}
-                    className="h-10 w-10 border-slate-200 bg-white shadow-sm"
-                >
-                    <Menu className="h-5 w-5" />
-                </Button>
-            </div>
+            {/* Mobile navigation trigger */}
 
-            {/* Mobile Drawer - Base UI */}
+
+
+            {/* Mobile drawer — shadcn Base UI */}
+
             <Sheet
                 open={mobileOpen}
                 onOpenChange={setMobileOpen}
@@ -513,7 +542,11 @@ export default function Sidebar() {
                 <SheetContent
                     side="left"
                     showCloseButton={false}
-                    className="w-64 max-w-[85vw] border-r border-slate-200 bg-white p-0"
+                    className={cn(
+                        "w-64 max-w-[85vw] gap-0 p-0",
+                        "border-r border-sidebar-border",
+                        "bg-sidebar text-sidebar-foreground"
+                    )}
                 >
                     <SheetTitle className="sr-only">
                         Nexora CRM Navigation
@@ -523,22 +556,11 @@ export default function Sidebar() {
                         Navigate through Nexora CRM modules
                     </SheetDescription>
 
-                    <div className="relative h-full">
+                    <div className="relative h-full min-h-0">
                         <SidebarContent
                             isMobile
                             onNavigate={() => setMobileOpen(false)}
                         />
-
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            aria-label="Close navigation"
-                            onClick={() => setMobileOpen(false)}
-                            className="absolute right-3 top-6 h-8 w-8"
-                        >
-                            <X className="h-4 w-4" />
-                        </Button>
                     </div>
                 </SheetContent>
             </Sheet>

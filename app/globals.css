@@ -4,43 +4,56 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================
+   NEXORA — TAILWIND THEME MAPPING
+============================================ */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
   --font-sans: var(--font-montserrat);
-  --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-montserrat);
+  --font-mono: var(--font-geist-mono);
 
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -50,226 +63,125 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ============================================
+   NEXORA — NEUTRAL LIGHT / TRUE DARK
+   Single source of truth for theme colors.
+   Green is an accent, never the page tint.
+============================================ */
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #087f69;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #252525;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f3f4f3;
+  --accent-foreground: #252525;
+  --destructive: #dc3545;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #087f69;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #333333;
+  --sidebar-primary: #087f69;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eeeeee;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #087f69;
+  --chart-1: #087f69;
+  --chart-2: #387ee7;
+  --chart-3: #914ff3;
+  --chart-4: #e59a25;
+  --chart-5: #e16b88;
+  --brand-primary: #087f69;
+  --brand-primary-hover: #066b59;
+  --brand-primary-light: #e3f4ec;
+  --brand-primary-soft: #f1f7f3;
+  --brand-primary-foreground: #ffffff;
+  --brand-heading: #171717;
+  --brand-text: #333333;
+  --brand-muted: #737373;
+  --brand-border: #e5e5e5;
+  --brand-canvas: #ffffff;
+  --brand-surface: #ffffff;
+  --app-font: var(--font-montserrat);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --app-scrollbar: #d0d0d0;
+  --app-scrollbar-hover: #ababab;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  color-scheme: dark;
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --card: #111111;
+  --card-foreground: #f0f0f0;
+  --popover: #191919;
+  --popover-foreground: #ededed;
+  --primary: #35b894;
+  --primary-foreground: #061a13;
+  --secondary: #1b1b1b;
+  --secondary-foreground: #ededed;
+  --muted: #1c1c1c;
+  --muted-foreground: #a3a3a3;
+  --accent: #242424;
+  --accent-foreground: #f0f0f0;
+  --destructive: #f06c72;
+  --border: #292929;
+  --input: #353535;
+  --ring: #35b894;
+  --sidebar: #111111;
+  --sidebar-foreground: #d0d0d0;
+  --sidebar-primary: #35b894;
+  --sidebar-primary-foreground: #061a13;
+  --sidebar-accent: #222222;
+  --sidebar-accent-foreground: #f0f0f0;
+  --sidebar-border: #292929;
+  --sidebar-ring: #35b894;
+  --chart-1: #35b894;
+  --chart-2: #468cff;
+  --chart-3: #a66afa;
+  --chart-4: #f5a524;
+  --chart-5: #f16b85;
+  --brand-primary: #35b894;
+  --brand-primary-hover: #4bcba8;
+  --brand-primary-light: #203a32;
+  --brand-primary-soft: #192821;
+  --brand-primary-foreground: #061a13;
+  --brand-heading: #f0f0f0;
+  --brand-text: #d0d0d0;
+  --brand-muted: #a3a3a3;
+  --brand-border: #292929;
+  --brand-canvas: #0a0a0a;
+  --brand-surface: #111111;
+  --app-scrollbar: #424242;
+  --app-scrollbar-hover: #606060;
 }
+
+/* ============================================
+   GLOBAL TYPOGRAPHY AND BASE STYLES
+============================================ */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  html {
-    @apply font-sans;
-  }
-}
-
-/* ============================================
-   NEXORA CRM - ENTERPRISE DESIGN SYSTEM
-   ============================================ */
-
-/* Brand Color Tokens */
-
-:root {
-  /* Custom Brand Palette */
-  --brand-primary: #087f69;
-  --brand-primary-hover: #066b59;
-  --brand-primary-light: #e9f7f2;
-  --brand-primary-soft: #f1faf6;
-  --brand-primary-foreground: #ffffff;
-
-  /* Neutral Palette */
-  --brand-heading: #1c2c27;
-  --brand-text: #26332f;
-  --brand-muted: #52615b;
-  --brand-border: #e5ebe8;
-  --brand-canvas: #f8faf9;
-  --brand-surface: #ffffff;
-
-  /* Typography */
-  --app-font: var(--font-montserrat);
-
-  /* shadcn/ui Semantic Tokens */
-  --background: #f8faf9;
-  --foreground: #26332f;
-
-  --card: #ffffff;
-  --card-foreground: #172b28;
-
-  --popover: #ffffff;
-  --popover-foreground: #172b28;
-
-  --primary: #087f69;
-  --primary-foreground: #ffffff;
-
-  --secondary: #f1f5f3;
-  --secondary-foreground: #29443d;
-
-  --muted: #f1f5f3;
-  --muted-foreground: #52615b;
-
-  --accent: #e9f7f2;
-  --accent-foreground: #066b59;
-
-  --border: #e5ebe8;
-  --input: #dce5e0;
-  --ring: #087f69;
-
-  /* Charts */
-  --chart-1: #087f69;
-  --chart-2: #34a38b;
-  --chart-3: #81c9b5;
-  --chart-4: #a7b9ef;
-  --chart-5: #dbb77e;
-
-  /* Sidebar */
-  --sidebar: #ffffff;
-  --sidebar-foreground: #26332f;
-
-  --sidebar-primary: #087f69;
-  --sidebar-primary-foreground: #ffffff;
-
-  --sidebar-accent: #e9f7f2;
-  --sidebar-accent-foreground: #075c4c;
-
-  --sidebar-border: #e5ebe8;
-  --sidebar-ring: #087f69;
-
-  /* General Radius */
-  --radius: 0.625rem;
-}
-
-/* Dark Theme Tokens */
-
-.dark {
-  --background: #101b18;
-  --foreground: #e9f4ef;
-
-  --card: #182723;
-  --card-foreground: #e9f4ef;
-
-  --popover: #182723;
-  --popover-foreground: #e9f4ef;
-
-  --primary: #50c4a4;
-  --primary-foreground: #10241d;
-
-  --secondary: #21332d;
-  --secondary-foreground: #d9eee5;
-
-  --muted: #21332d;
-  --muted-foreground: #a3b9b0;
-
-  --accent: #25453a;
-  --accent-foreground: #b9f0dc;
-
-  --border: #31453d;
-  --input: #31453d;
-  --ring: #50c4a4;
-
-  --sidebar: #16231f;
-  --sidebar-foreground: #e9f4ef;
-
-  --sidebar-primary: #50c4a4;
-  --sidebar-primary-foreground: #10241d;
-
-  --sidebar-accent: #25453a;
-  --sidebar-accent-foreground: #b9f0dc;
-
-  --sidebar-border: #31453d;
-  --sidebar-ring: #50c4a4;
-
-  --brand-primary: #50c4a4;
-  --brand-primary-hover: #74d7b9;
-  --brand-primary-light: #25453a;
-  --brand-primary-soft: #1c322a;
-  --brand-primary-foreground: #10241d;
-
-  --brand-heading: #e9f4ef;
-  --brand-text: #c4d9d0;
-  --brand-muted: #a3b9b0;
-  --brand-border: #31453d;
-  --brand-canvas: #101b18;
-  --brand-surface: #182723;
-}
-
-/* Global Typography */
-
-@layer base {
   html {
     font-family: var(--app-font), sans-serif;
   }
 
   body {
+    @apply bg-background text-foreground;
     font-family: var(--app-font), sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -297,14 +209,40 @@
   }
 }
 
-/* Consistent App Selection */
+/* ============================================
+   SCROLLBARS
+============================================ */
+
+.nexora-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--app-scrollbar) transparent;
+}
+
+.nexora-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.nexora-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--app-scrollbar);
+  border-radius: 10px;
+}
+
+.nexora-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--app-scrollbar-hover);
+}
+
+.nexora-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================
+   SELECTION AND ACCESSIBILITY
+============================================ */
 
 ::selection {
   background: var(--brand-primary-light);
   color: var(--brand-heading);
 }
-
-/* Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -315,5 +253,86 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================
+   NEXORA — SHARED MOTION TOKENS
+============================================ */
+
+:root {
+  --motion-fast: 120ms;
+  --motion-normal: 160ms;
+  --motion-slow: 200ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Floating panels remain mounted while hidden.
+ * Visibility changes after the closing transition.
+ */
+
+.nexora-popover {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, 4px, 0);
+
+  transition:
+    opacity var(--motion-fast) ease,
+    transform var(--motion-normal) var(--motion-ease),
+    visibility var(--motion-normal);
+}
+
+.nexora-popover[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Compact row interaction */
+.nexora-menu-item {
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
+}
+
+/* Smooth expandable navigation using grid rows */
+.nexora-accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+
+  transition:
+    grid-template-rows var(--motion-slow) var(--motion-ease),
+    opacity var(--motion-normal) ease;
+}
+
+.nexora-accordion[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.nexora-accordion-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Remove extra backdrop blur from sheets */
+[data-slot="sheet-overlay"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  .nexora-popover,
+  .nexora-menu-item,
+  .nexora-accordion {
+    transition-duration: 0.01ms !important;
+    transform: none !important;
   }
 }
