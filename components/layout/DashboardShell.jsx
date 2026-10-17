@@ -11,6 +11,8 @@ import {
 	useSidebar,
 } from "@/components/layout/SidebarProvider";
 
+import { LeadsProvider } from "@/context/LeadsProvider";
+
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 /* ============================================
@@ -89,9 +91,11 @@ export default function DashboardShell({ children }) {
 	return (
 		<ThemeProvider>
 			<SidebarProvider>
-				<DashboardContent>
+				<LeadsProvider>
+                <DashboardContent>
 					{children}
 				</DashboardContent>
+                </LeadsProvider>
 			</SidebarProvider>
 		</ThemeProvider>
 	);

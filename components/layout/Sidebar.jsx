@@ -336,6 +336,11 @@ function NavigationItem({
                             >
                                 All {item.title}
                             </Link>
+                            {item.id === "leads" && [
+                                { href: "/leads/pipeline", label: "Pipeline" },
+                                { href: "/leads/new", label: "Add Lead" },
+                            ].map(sub => <Link key={sub.href} href={sub.href} onClick={onNavigate}
+                                className={cn("nexora-menu-item flex h-[30px] items-center rounded-md px-2.5 text-[11px] font-medium hover:bg-sidebar-accent/70", pathname === sub.href ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground")}>{sub.label}</Link>)}
                         </div>
                     </div>
                 </div>
