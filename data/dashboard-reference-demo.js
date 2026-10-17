@@ -37,6 +37,7 @@ export const scheduleItems = [
   { id: "S-104", date: DEMO_REFERENCE_DATE, time: "14:30", title: "Demo — Northwind Traders", company: "Northwind Traders", detail: "Discovery call", type: "meeting", completed: false },
   { id: "S-105", date: DEMO_REFERENCE_DATE, time: "16:00", title: "Update CRM notes", company: "Cobalt Health", detail: "Pilot expansion", type: "task", completed: false },
   { id: "S-106", date: DEMO_REFERENCE_DATE, time: "17:00", title: "Check-in call", company: "Vantage Retail", detail: "Onboarding", type: "call", completed: false },
+  { id: "S-107", date: DEMO_REFERENCE_DATE, time: "17:00", title: "a call", company: "Retail", detail: "Onding", type: "call", completed: false },
 ];
 
 const sum = (items, key) => items.reduce((acc, row) => acc + row[key], 0);
