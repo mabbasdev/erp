@@ -49,8 +49,8 @@ export default function KpiCard({ metric, value, previousValue }) {
 				<span className={cn(
 					"rounded-md border px-1.5 py-0.5 font-semibold tabular-nums",
 					change === null ? "border-border bg-muted text-muted-foreground" :
-						positive ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400" :
-							"border-rose-500/20 bg-rose-500/10 text-rose-700 dark:text-rose-400"
+					positive ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400" :
+					"border-rose-500/20 bg-rose-500/10 text-rose-700 dark:text-rose-400"
 				)}>
 					{change === null ? "—" : `${positive ? "+" : ""}${change.toFixed(1)}%`}
 				</span>
