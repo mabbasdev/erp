@@ -12,7 +12,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-montserrat);
+  --font-sans: var(--font-geist);
   --font-heading: var(--font-montserrat);
   --font-mono: var(--font-geist-mono);
 
@@ -113,7 +113,7 @@
   --brand-border: #e5e5e5;
   --brand-canvas: #ffffff;
   --brand-surface: #ffffff;
-  --app-font: var(--font-montserrat);
+  --app-font: var(--font-geist);
   --radius: 0.625rem;
   --app-scrollbar: #d0d0d0;
   --app-scrollbar-hover: #ababab;
