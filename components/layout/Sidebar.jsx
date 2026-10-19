@@ -188,8 +188,9 @@ function NavigationItem({
     onNavigate,
     onExpandSidebar,
 }) {
-    const active = isActiveRoute(pathname, item.href);
-    const [expanded, setExpanded] = useState(false);
+    const active = item.expandable ? pathname === item.href : isActiveRoute(pathname, item.href);
+    const withinSection = isActiveRoute(pathname,item.href);
+    const [expanded, setExpanded] = useState(withinSection);
     const Icon = item.icon;
 
     const itemClasses = cn(
@@ -253,7 +254,7 @@ function NavigationItem({
                                 "h-3.5 w-3.5 shrink-0",
                                 "text-muted-foreground",
                                 "transition-transform duration-200",
-                                expanded && "rotate-90"
+                                (expanded || withinSection) && "rotate-90"
                             )}
                         />
                     )}
@@ -315,9 +316,9 @@ function NavigationItem({
             {item.expandable && !collapsed && (
                 <div
                     className="nexora-accordion"
-                    data-open={expanded ? "true" : "false"}
-                    inert={!expanded}
-                    aria-hidden={!expanded}
+                    data-open={(expanded || withinSection) ? "true" : "false"}
+                    inert={!(expanded || withinSection)}
+                    aria-hidden={!(expanded || withinSection)}
                 >
                     <div className="nexora-accordion-inner">
                         <div className="ml-[18px] border-l border-sidebar-border py-0.5 pl-3">
@@ -329,7 +330,7 @@ function NavigationItem({
                                     "flex h-[30px] items-center",
                                     "rounded-md px-2.5",
                                     "text-[11px] font-medium",
-                                    active
+                                    (pathname === item.href)
                                         ? "bg-sidebar-accent text-sidebar-accent-foreground"
                                         : "text-sidebar-foreground hover:bg-sidebar-accent/70"
                                 )}

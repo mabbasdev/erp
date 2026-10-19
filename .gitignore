@@ -42,3 +42,5 @@ next-env.d.ts
 
 LEADS_BACKEND_INTEGRATION.md
 INTEGRATION_GUIDE.md
+
+*.md

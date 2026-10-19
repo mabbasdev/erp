@@ -56,14 +56,14 @@ export const demoLeads = names.map(([firstName, lastName, company, status, score
     id: `lead-${String(index + 1).padStart(3, "0")}`, firstName, lastName,
     email: `${firstName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, "")}.${lastName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z]/g, "")}@${domain}.com`,
     phone: `+1 555 ${String(1000000 + index * 137).slice(0, 7)}`,
-    company, companyWebsite: `https://${domain}.com`, industry: "Technology", companySize: "11-50", location: "United States",
+    customerType: "business", company, companyWebsite: `https://${domain}.com`, industry: "Technology", companySize: "11-50", location: "United States",
     jobTitle: "Operations Manager", status, score, ownerId, source,
     priority: score > 80 ? "High" : score < 40 ? "Low" : "Medium",
-    estimatedValue: (index + 2) * 1800, expectedClose: "", notes: "",
+    estimatedValue: (index + 2) * 1800, expectedClose: "", notes: "", profileImage: null,
     createdAt: new Date(Date.UTC(2026, 9, 1 + (index % 15), 12)).toISOString(),
     updatedAt: new Date(Date.UTC(2026, 9, 16 - (index % 6), 11)).toISOString(),
   };
 });
-export const blankLead = () => ({ firstName:"", lastName:"", email:"", phone:"", jobTitle:"", company:"", companyWebsite:"", industry:"", companySize:"", location:"", status:"New", source:"Website", ownerId:"u-alex", priority:"Medium", estimatedValue:0, expectedClose:"", notes:"", score:50 });
+export const blankLead = () => ({ firstName:"", lastName:"", customerType:"individual", email:"", phone:"", jobTitle:"", company:"", companyWebsite:"", industry:"", companySize:"", location:"", status:"New", source:"Website", ownerId:"u-alex", priority:"Medium", estimatedValue:0, expectedClose:"", notes:"", profileImage:null, score:50 });
 export const displayLeadName = lead => `${lead.firstName} ${lead.lastName}`.trim();
 export const initials = name => name.split(/\s+/).slice(0,2).map(s=>s[0]||"").join("").toUpperCase();
