@@ -18,7 +18,7 @@ function imageSignature(bytes, type) {
  * reaches the browser, and this server owns the destination folder and name.
  *
  * DEMO SAFETY: This route ONLY works on non-production environments when
- * ENABLE_DEMO_MEDIA_UPLOADS=true. Without real server authentication it must
+ * NODE_ENV=development. Without real server authentication it must
  * stay disabled in production. The dropdown demo identity is NOT authentication.
  *
  * TODO(AUTH): Before enabling production, replace demo gate with a verified
@@ -30,7 +30,7 @@ function imageSignature(bytes, type) {
  * workflow that removes old ImageKit files; don't delete an image on form cancel.
  */
 export async function POST(request) {
-  if (process.env.NODE_ENV === "production" || process.env.ENABLE_DEMO_MEDIA_UPLOADS !== "true") {
+  if (process.env.NODE_ENV !== "development") {
     return NextResponse.json({ error: "Uploads are disabled until authorized media upload is configured." }, { status: 403 });
   }
   const privateKey = process.env.IMAGEKIT_PRIVATE_KEY;

@@ -344,3 +344,13 @@
   background-image: radial-gradient(circle, var(--kpi-dot) 0.75px, transparent 0.9px);
   background-size: 16px 16px;
 }
+/* Leads table: ONE vertical scrollbar (dashboard content), horizontal-only table scroller.
+   TODO(API): Server pagination will reduce rendered rows, but retain this wrapper. */
+.nexora-table-horizontal { overflow-x: auto; overflow-y: hidden; scrollbar-gutter: stable; scrollbar-width: thin; }
+.nexora-table-horizontal::-webkit-scrollbar { height: 7px; }
+.nexora-table-horizontal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+.nexora-table-horizontal::-webkit-scrollbar-track { background: transparent; }
+
+/* Dashboard uses an internal page scroller; prevent a second browser/body Y scrollbar.
+   The rule applies only when the dashboard shell exists. */
+html:has(#dashboard-page-content), body:has(#dashboard-page-content) { height: 100%; overflow: hidden; }

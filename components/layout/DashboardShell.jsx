@@ -11,7 +11,7 @@ import {
 	useSidebar,
 } from "@/components/layout/SidebarProvider";
 
-import { LeadsProvider } from "@/context/LeadsProvider";
+import { LeadsProvider, useLeads } from "@/context/LeadsProvider";
 
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
